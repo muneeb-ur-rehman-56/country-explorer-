@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pakistan Explorer — mountains, heritage, cities and coast</title>
+<meta name="description" content="Explore Pakistan's provinces, cities and tourist places with live data.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{pine:'#0A2F28',emerald:'#12795F',glacier:'#CFE6E8',apricot:'#F4A340',snow:'#F6F9F8',ink:'#14231F'}}}}</script>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<a href="#overview" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-apricot focus:p-3">Skip to content</a>
+<header class="sticky top-0 z-40 bg-pine/90 backdrop-blur text-white">
+ <nav class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between" aria-label="Main">
+  <a href="#" class="font-display text-xl font-bold">Pakistan Explorer</a>
+  <div class="hidden md:flex gap-7 text-sm"><a href="#why" class="hover:text-apricot">Why Pakistan</a><a href="#provinces" class="hover:text-apricot">Provinces</a><a href="#cities" class="hover:text-apricot">Cities</a><a href="#places" class="hover:text-apricot">Places</a><a href="#culture" class="hover:text-apricot">Culture</a></div>
+  <button id="menu" class="md:hidden p-2" aria-label="Toggle menu">☰</button>
+ </nav>
+ <div id="mnav" class="hidden md:hidden px-5 pb-4 grid gap-3"><a href="#why">Why Pakistan</a><a href="#provinces">Provinces</a><a href="#cities">Cities</a><a href="#places">Places</a><a href="#culture">Culture</a></div>
+</header>
+
+<main>
+<section class="contours text-white relative overflow-hidden">
+ <div id="hero-img" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 mix-blend-soft-light" style="opacity:0" aria-hidden="true"></div>
+ <div class="relative max-w-7xl mx-auto px-5 pt-20 md:pt-28 pb-10">
+  <h1 class="font-display font-extrabold text-6xl sm:text-8xl lg:text-9xl leading-none">Pakistan</h1>
+  <p class="mt-6 text-xl md:text-2xl text-glacier max-w-2xl">From the warm Arabian Sea to the icy summit of K2, explore a country that climbs 8,611 metres.</p>
+  <div class="mt-8 flex flex-wrap gap-3"><a href="#places" class="bg-apricot text-pine font-bold px-6 py-3 rounded-full hover:brightness-95">Explore places</a><a href="#provinces" class="border border-white/40 px-6 py-3 rounded-full hover:bg-white/10">See the provinces</a></div>
+  <div class="mt-14 overflow-x-auto" id="ribbon" tabindex="0" aria-label="Scrollable elevation chart"></div>
+ </div>
+</section>
+
+<section id="overview" class="max-w-7xl mx-auto px-5 py-14">
+ <div class="flex flex-wrap items-baseline justify-between gap-2"><h2 class="font-display text-3xl font-bold">Pakistan at a glance</h2><span id="src" class="text-sm text-ink/60">Loading…</span></div>
+ <dl id="facts" class="mt-8 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6"></dl>
+</section>
+
+<section id="why" class="max-w-7xl mx-auto px-5 py-14">
+ <h2 class="font-display text-3xl md:text-4xl font-bold">Why Pakistan deserves your attention</h2>
+ <div id="why-grid" class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4"></div>
+</section>
+
+<section id="provinces" class="bg-white py-14">
+ <div class="max-w-7xl mx-auto px-5">
+  <h2 class="font-display text-3xl md:text-4xl font-bold">Provinces and territories</h2>
+  <div class="mt-8 grid lg:grid-cols-[280px_1fr] gap-6">
+   <div id="tabs" role="tablist" class="grid grid-cols-2 lg:grid-cols-1 gap-2 content-start"></div>
+   <div id="prov" class="rounded-3xl overflow-hidden border border-pine/10 bg-snow min-h-[24rem]" aria-live="polite"></div>
+  </div>
+ </div>
+</section>
+
+<section id="cities" class="max-w-7xl mx-auto px-5 py-14">
+ <h2 class="font-display text-3xl md:text-4xl font-bold">Cities, with weather right now</h2>
+ <p class="mt-2 text-ink/70">Temperatures come live from Open-Meteo. Select a city for details and a 5-day forecast.</p>
+ <div id="city-grid" class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+</section>
+
+<section id="places" class="bg-glacier/40 py-14">
+ <div class="max-w-7xl mx-auto px-5">
+  <h2 class="font-display text-3xl md:text-4xl font-bold">Beautiful places to visit</h2>
+  <div class="mt-6 flex flex-wrap gap-3 items-center justify-between">
+   <div id="chips" class="flex flex-wrap gap-2"></div>
+   <label class="sr-only" for="search">Search places</label>
+   <input id="search" type="search" placeholder="Search by place or province" class="w-full sm:w-72 px-4 py-2 rounded-full border border-pine/20 bg-white">
+  </div>
+  <div id="place-grid" class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+ </div>
+</section>
+
+<section id="culture" class="max-w-7xl mx-auto px-5 py-14 grid md:grid-cols-2 gap-10">
+ <div><h2 class="font-display text-3xl font-bold">What to eat</h2>
+  <ul class="mt-6 divide-y divide-pine/10"><li class="py-3"><b>Biryani</b> — Sindhi and Karachi styles, rich with spice</li><li class="py-3"><b>Nihari</b> — slow-cooked beef stew, a Lahori breakfast</li><li class="py-3"><b>Chapli kebab</b> — Peshawar’s crisp, juicy kebab</li><li class="py-3"><b>Sajji</b> — Balochi roast lamb or chicken</li><li class="py-3"><b>Mangoes</b> — Sindhri and Chaunsa, best in summer</li></ul></div>
+ <div><h2 class="font-display text-3xl font-bold">Festivals and days</h2>
+  <ul class="mt-6 divide-y divide-pine/10"><li class="py-3"><b>23 March</b> — Pakistan Day</li><li class="py-3"><b>Mid-May</b> — Chilam Joshi, Kalash spring festival</li><li class="py-3"><b>Early July</b> — Shandur Polo Festival, on one of the world’s highest polo grounds</li><li class="py-3"><b>14 August</b> — Independence Day</li><li class="py-3"><b>Eid ul-Fitr and Eid ul-Adha</b> — dates follow the lunar calendar</li></ul></div>
+</section>
+</main>
+
+<footer class="bg-pine text-glacier py-10"><div class="max-w-7xl mx-auto px-5 text-sm grid gap-2">
+ <p class="font-display text-xl text-white">Pakistan Explorer</p>
+ <p>Class project by [Your Name], [Class / Roll No.]. Data: REST Countries, Wikipedia and Open-Meteo (free, no API keys).</p>
+</div></footer>
+
+<dialog id="modal" class="rounded-3xl p-0 w-[min(46rem,94vw)] max-h-[90vh] overflow-y-auto bg-snow">
+ <button id="close" class="sticky top-3 float-right mr-3 z-10 bg-pine text-white w-10 h-10 rounded-full" aria-label="Close">✕</button>
+ <div id="m-body"></div>
+</dialog>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>
